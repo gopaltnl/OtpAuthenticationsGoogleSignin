@@ -1406,5 +1406,191 @@ Android TabLayout provides horizontal layout to display tabs. We can display mor
 
 
 
+# Creating a new project and add necessary libraries
+
+Open Android Studio and create a new project. I have created DemoTabLayout.
+
+After create a new project, First of all we have to need include design libraries in the dependencies section of our build.gradle file so include this libraries in your build.gradle file by below line.
+
+```
+implementation 'com.android.support:design:28.0.0'
+```
+
+# Create Two Fragments
+
+## Goto java first package right click select New  Select Fragment -Fragment_blank
+
+* Upload Fragment
+```
+package com.vikas.demotablayout;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+class Upload extends Fragment {
+   @Override
+   public View onCreateView(LayoutInflater inflater, ViewGroup container,
+               Bundle savedInstanceState) {
+           return inflater.inflate(R.layout.fragment_upload, container, false);
+         }
+   }
+```
+# It’s layout
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+     
+    <TextView
+      android:id="@+id/textView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:text="Video"
+      android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+ </RelativeLayout>
+```
+
+
+* Upload Fragment
+```
+package com.vikas.demotablayout;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+class Video extends Fragment {
+   @Override
+   public View onCreateView(LayoutInflater inflater, ViewGroup container,
+               Bundle savedInstanceState) {
+           return inflater.inflate(R.layout.fragment_video, container, false);
+         }
+   }
+```
+# It’s layout
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+     
+    <TextView
+      android:id="@+id/textView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:text="Video"
+      android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+ </RelativeLayout>
+```
+# goto activity_video.xml file
+
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".VediosActivity">
+
+    <android.support.design.widget.TabLayout
+        android:background="@drawable/shape"
+        app:tabIndicatorColor="#FF5722"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/vtab">
+
+    </android.support.design.widget.TabLayout>
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/vpager">
+
+    </android.support.v4.view.ViewPager>
+</LinearLayout>
+```
+
+# Goto VideoActivity get the id for ViewPager and TabLayout,and Create the VideoMyAdapter
+
+```
+package com.example.findapp;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+
+public class VediosActivity extends AppCompatActivity {
+
+   ViewPager pager;
+   TabLayout layout;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_vedios);
+        pager=findViewById(R.id.vpager);
+        layout=findViewById(R.id.vtab);
+        pager.setAdapter(new VedioMyAdapter(getSupportFragmentManager()));
+        layout.setupWithViewPager(pager);
+
+    }
+
+    public class VedioMyAdapter extends FragmentStatePagerAdapter
+    {
+        public VedioMyAdapter(FragmentManager fm)
+        {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int i)
+        {
+            switch (i)
+            {
+                case 0:return new VideoFragment();
+                case 1:return new ShowVdeioFragment();
+
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position)
+            {
+                case 0:return "Upload";
+                case 1:return "Vedios";
+
+            }
+            return super.getPageTitle(position);
+        }
+    }
+}
+
+```
 
 
