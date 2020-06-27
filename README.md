@@ -837,6 +837,16 @@ public class MainActivity extends AppCompatActivity {
 
 ![f27](https://user-images.githubusercontent.com/51777024/85914415-f712e700-b85a-11ea-956b-91133e7edf64.png)
 
+# UploadimagesFirebaseStorage
+## Creating a new Project
+* As always the first step is creating a new Android Studio Project.
+* So just create a new Android Studio project using an Empty Activity. 
+* I created a project named FirebaseStorage.
+* Once your project is loaded, you can add Firebase storage to it.
+## Adding FirebaseStorage
+* With new Android 2.2 it is really easy to integrate firebase. (If you haven’t updated your studio, you should update your Android Studio).
+* To add Firebase Storage, click on Tools -> Firebase
+
 
 
 
