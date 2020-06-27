@@ -1,4 +1,4 @@
-# Mobile Otp Authentications
+# Firebase Mobile Otp Authentication
 
 # Firebase
 
@@ -62,7 +62,7 @@ Let's start with basics, i.e., Analytics. When we select Analytics, it gives us 
 
 ![f2](https://user-images.githubusercontent.com/51777024/85912353-7f888c00-b849-11ea-99e4-9bc3e1ca528a.png)
 
-Step 1:
+# Step 1:
 
 So, in the first step, we will connect to Firebase. When we click on connect to Firebase, it may bring up our browser, and wemay have to log into our Google account.If we log in to our Google account, 
 we may have to give access to Android Studio so that it can allow us to add stuff.
@@ -77,7 +77,7 @@ Here, we have to create a new Firebase project or choosing the existing Firebase
 
 ![f5](https://user-images.githubusercontent.com/51777024/85912367-8fa06b80-b849-11ea-8bd4-844f90d5aa53.png)
 
-Step 2:
+# Step 2:
 
 In the next step, we will add analytics to our app by clicking on Add Analytics to your app. This will actually update our build.gradle files, which we did in the previous section.
 
@@ -89,13 +89,105 @@ When we click on Accept Changes, it will update our Gradle files, which we can v
 
 ![f8](https://user-images.githubusercontent.com/51777024/85912373-9929d380-b849-11ea-848c-912f425b58c0.png)
 
-Step 3:
+# Step 3:
 
 To sign in users by SMS, you must first enable the Phone Number sign-in method for your Firebase project:
 * In the Firebase console, open the Authentication section.
 * On the Sign-in Method page, enable the Phone Number sign-in method.
 
-Step 4 :get the firebase instance at oncreate()
+# Step 4: activity_main.xml file
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter Valid Phone No"
+        android:inputType="phone"
+        android:id="@+id/phone"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="sendotp"
+        android:id="@+id/sendotp"
+        />
+   <EditText
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:hint="Enter Otp Here"
+       android:id="@+id/otp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="signin"
+        android:id="@+id/sendsignin"/>
+</LinearLayout>
+```
+# Step 5:create the methods and get the id edittext 
+
+```
+package com.example.gopalotpauth;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskExecutors;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
+import java.util.concurrent.TimeUnit;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText phone,otp;
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+       
+        phone=findViewById(R.id.phone);
+        otp=findViewById(R.id.otp);
+
+        findViewById(R.id.sendotp).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+              
+            }
+
+          
+        findViewById(R.id.sendsignin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+               
+            }
+    }
+}
+
+
+```
+
+# Step 6 :get the firebase instance at oncreate()
 
 ```
 private FirebaseAuth mAuth;
@@ -103,7 +195,7 @@ private FirebaseAuth mAuth;
 mAuth = FirebaseAuth.getInstance();
 
 ```
-Step 5: Send a Verification Code to the Users Phone
+# Step 7: Send a Verification Code to the Users Phone
 
 ```
 pass their phone number to the PhoneAuthProvider.verifyPhoneNumber method to request that Firebase verify the user's phone number.
@@ -115,7 +207,7 @@ PhoneAuthProvider.getInstance().verifyPhoneNumber(
         this,               // Activity (for callback binding)
         mCallbacks);        // OnVerificationStateChangedCallbacks
 ```
-Step6 : implementation on callback functions
+# Step 8: implementation on callback functions
 
 ```
 mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {@Override
@@ -131,7 +223,7 @@ Log.d(TAG, "onVerificationCompleted:" + credential);
     }
 
 ```
-Step7 :implementation on callback functions
+# Step 9 :implementation on callback functions
 
 ```
  @Override
@@ -146,7 +238,7 @@ Step7 :implementation on callback functions
 };
 
 ```
-Step8 :Create the PhoneAuthCredential Object
+# Step 10:Create the PhoneAuthCredential Object
 
 ```
 To create the PhoneAuthCredential object, call PhoneAuthProvider.getCredential
@@ -154,7 +246,7 @@ PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId,
 
 ```
 
-Step 9: Signin with User
+# Step 11: Signin with User
 
 ```
 private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) 
@@ -174,13 +266,140 @@ private void signInWithPhoneAuthCredential(PhoneAuthCredential credential)
             });}
             
 ```
+# Step 12: MainActivity.java file
+
+```
+package com.example.gopalotpauth;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskExecutors;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
+import java.util.concurrent.TimeUnit;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText phone,otp;
+    FirebaseAuth auth;
+    String vid;
+    private PhoneAuthProvider.ForceResendingToken mResendToken;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        auth=FirebaseAuth.getInstance();
+        phone=findViewById(R.id.phone);
+        otp=findViewById(R.id.otp);
+
+        findViewById(R.id.sendotp).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                sendotpauth();
+            }
+
+            private void sendotpauth()
+            {
+                String ph=phone.getText().toString();
+                if (ph.isEmpty())
+                {
+                    phone.setError("PHONE NO IS REQUIRED");
+                    phone.requestFocus();
+                    return;
+                }
+                if (phone.length()<10)
+                {
+                    phone.setError("ENTER VALID PHONE NUMBER");
+                    phone.requestFocus();
+                    return;
+                }
+                PhoneAuthProvider.getInstance().verifyPhoneNumber(ph,60,
+                        TimeUnit.SECONDS, TaskExecutors.MAIN_THREAD,mcallback);
+            }
+
+            PhoneAuthProvider.OnVerificationStateChangedCallbacks mcallback=new
+                    PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+                        @Override
+                        public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                            super.onCodeSent(s, forceResendingToken);
+                            vid=s;
+
+                        }
+
+                        @Override
+                        public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+
+                        }
+
+                        @Override
+                        public void onVerificationFailed(FirebaseException e) {
+
+                        }
+                    };
+        });
+
+        findViewById(R.id.sendsignin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                signinAuth();
+            }
+
+            private void signinAuth() {
+                String entercode=otp.getText().toString();
+                PhoneAuthCredential credential=PhoneAuthProvider.getCredential(vid,entercode);
+                signincredential(credential);
+            }
+            private void signincredential(PhoneAuthCredential credential) {
+                auth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if (task.isSuccessful())
+                        {
+                            Toast.makeText(MainActivity.this, "sucess", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+
+                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException)
+                            {
+                                Toast.makeText(MainActivity.this, "wrong otp", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+                    }
+
+                });
+
+            }
+        });
+    }
+}
+
+
+```
+
 # Download Code 
 
 https://github.com/AP-Skill-Development-Corporation/AdvancedAndroid/tree/master/GopalOtpAuth
 
-# Firebase: Google Sign-In Authentication
+# -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-As we have discussed earlier, Firebase provides different types of Authentication methods. In our previous section, we learned how authentication is done using Firebase UI and Firebase SDK. In this section, we will learn another method, i.e., Google Sign-in Authentication. It is pretty easy to do.
+# Firebase Google Sign-In Authentication
+
+Firebase provides different types of Authentication methods. In our previous section, we learned how authentication is done using Firebase UI and Firebase SDK. In this section, we will learn another method, i.e., Google Sign-in Authentication. It is pretty easy to do.
 
 Starting steps are the same as we have done with other authentication methods, which are as follows:
 
