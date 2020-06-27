@@ -104,10 +104,11 @@ private FirebaseAuth mAuth;
 mAuth = FirebaseAuth.getInstance();
 
 ```
-Step 5:Send a Verification Code to the Users Phone
+Step 5: Send a Verification Code to the Users Phone
 
 ```
-pass their phone number to the PhoneAuthProvider.verifyPhoneNumber method to request that Firebase verify the user's phone number. For example:
+pass their phone number to the PhoneAuthProvider.verifyPhoneNumber method to request that Firebase verify the user's phone number.
+
 PhoneAuthProvider.getInstance().verifyPhoneNumber(
         phoneNumber,        // Phone number to verify
         60,                 // Timeout duration
@@ -115,6 +116,71 @@ PhoneAuthProvider.getInstance().verifyPhoneNumber(
         this,               // Activity (for callback binding)
         mCallbacks);        // OnVerificationStateChangedCallbacks
 ```
+Step6 : implementation on callback functions
+
+```
+mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {@Override
+    public void onVerificationCompleted(PhoneAuthCredential credential) 
+   {      
+Log.d(TAG, "onVerificationCompleted:" + credential);
+ signInWithPhoneAuthCredential(credential);
+    }
+@Override
+    public void onVerificationFailed(FirebaseException e) 
+  {
+          
+    }
+
+```
+Step7 :implementation on callback functions
+
+```
+ @Override
+    public void onCodeSent(@NonNull String verificationId,
+                           @NonNull PhoneAuthProvider.ForceResendingToken token) {
+            Log.d(TAG, "onCodeSent:" + verificationId);
+        // Save verification ID and resending token so we can use them later
+        mVerificationId = verificationId;
+        mResendToken = token
+        // ...
+    }
+};
+
+```
+Step8 :Create the PhoneAuthCredential Object
+
+```
+To create the PhoneAuthCredential object, call PhoneAuthProvider.getCredential
+PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
+
+```
+
+Step 9: Signin with User
+
+```
+private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) 
+{
+    mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+           @Override
+           public void onComplete(@NonNull Task<AuthResult> task){
+           if (task.isSuccessful()) 
+          {
+           //navigate new activity                                    
+          } else 
+          {
+              //failed      
+          }
+          }
+          }
+            });}
+            
+```
+
+
+
+
+
+
 
 
 
