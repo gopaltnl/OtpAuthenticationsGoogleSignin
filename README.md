@@ -43,8 +43,6 @@ You can authenticate your app’s users through the following methods:
 
 # Steps to Implementation Of Application
 
-* Starting a new project
-
 We create a new project by clicking on Start a new Android Studio project from Welcome to Android Studio dialog box.
 
 ![imag1](https://user-images.githubusercontent.com/51777024/85912182-400d7000-b848-11ea-81ec-e523965e1fae.jpg)
