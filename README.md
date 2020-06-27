@@ -174,7 +174,7 @@ private void signInWithPhoneAuthCredential(PhoneAuthCredential credential)
             });}
             
 ```
-# Download Code Open the Below Url
+# Download Code 
 
 https://github.com/AP-Skill-Development-Corporation/AdvancedAndroid/tree/master/GopalOtpAuth
 
