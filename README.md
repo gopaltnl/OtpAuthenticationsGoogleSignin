@@ -1119,4 +1119,11 @@ Now just run your application.
 
 ![a11](https://user-images.githubusercontent.com/51777024/85916790-a3f85e80-b871-11ea-919a-831dbd39b10a.png)
 
+# Retrieving Files from Firebase Storage
+* Now we will create a new activity where we display all the uploaded images with labels.
+* So create a new activity named ShowImagesActivity and inside the layout file of this activity we will create a RecyclerView.
+# Adding RecyclerView and CardView
+* First we need to add dependencies for RecyclerView and CardView.
+* Go to File -> Project Structure and go to dependencies tab. Here click on plus icon and select Library dependency.
+
 
