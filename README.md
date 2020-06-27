@@ -41,9 +41,13 @@ You can authenticate your app’s users through the following methods:
 
 ![example](https://user-images.githubusercontent.com/51777024/85912071-35061000-b847-11ea-86fb-3a27ac3c92a6.jpg)
 
-Steps to Implementation Of Application
+# Steps to Implementation Of Application
+* Starting a new project
+We create a new project by clicking on Start a new Android Studio project from Welcome to Android Studio dialog box.
 
-* Step1
-# Starting a new project
+
+
+
+
 
 
