@@ -23,5 +23,6 @@ authentication and hosting, etc. Let's take a look at these features to understa
 * Mobile authentication is the verification of a user's identity through the use a mobile device and one or more authentication 
   methods for secure access.
 
+![firebase-authentication](https://user-images.githubusercontent.com/51777024/85911439-d9398800-b842-11ea-99ef-9c5631ddb172.png)
 
 
