@@ -53,6 +53,10 @@ We create a new project by clicking on Start a new Android Studio project from W
 
 ![image3](https://user-images.githubusercontent.com/51777024/85912239-a5616100-b848-11ea-8a43-03d311d44df3.png)
 
+# Firebase Assistance
+
+We can simply add Firebase using Firebase Assistance by selecting Firebase from the tools menu in Android Studio.
+
 
 
 
