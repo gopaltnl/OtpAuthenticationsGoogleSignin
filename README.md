@@ -3,9 +3,8 @@
 # Firebase
 
 * Firebase is a Backend-as-a-Service, and it is a real-time database which is basically designed for mobile applications.
-* Google Firebase is a Google-backed application development software that enables developers to develop iOS,Android and 
-Web apps. Firebase provides tools for tracking analytics,reporting and fixing app crashes,creating marketing and product
-experiment.
+* Google Firebase is a Google-backed application development software that enables developers to develop iOS,Android and Web apps. 
+* Firebase provides tools for tracking analytics,reporting and fixing app crashes,creating marketing and product experiment.
 
 ![firebase](https://user-images.githubusercontent.com/51777024/85911219-814e5180-b841-11ea-8071-273f9b78c4f9.png)
 
@@ -182,10 +181,10 @@ As we have discussed earlier, Firebase provides different types of Authenticatio
 
 Starting steps are the same as we have done with other authentication methods, which are as follows:
 
-Creating an Android project.
-Creating a Firebase project.
-Adding Firebase to the Android project or application, either manually or Firebase Assistance.
-Adding the required libraries and JSON files.
+* Creating an Android project.
+* Creating a Firebase project.
+* Adding Firebase to the Android project or application, either manually or Firebase Assistance.
+* Adding the required libraries and JSON files.
 
 # Step 1:
 
