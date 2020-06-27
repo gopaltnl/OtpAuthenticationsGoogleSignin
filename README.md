@@ -55,7 +55,44 @@ We create a new project by clicking on Start a new Android Studio project from W
 
 # Firebase Assistance
 
-We can simply add Firebase using Firebase Assistance by selecting Firebase from the tools menu in Android Studio.
+We can simply add Firebase using Firebase Assistance by selecting Firebase from the tools menu in Android Studio
+When we click on Firebase, a new window will open that contains several Firebase features such as Analytics, Cloud
+Messaging, Authentication,and Real-time Database, etc.
+
+![f1](https://user-images.githubusercontent.com/51777024/85912347-78617e00-b849-11ea-949d-ecba0a0b447b.png)
+
+Let's start with basics, i.e., Analytics. When we select Analytics, it gives us the step by step guide of what we need to do.
+
+![f2](https://user-images.githubusercontent.com/51777024/85912353-7f888c00-b849-11ea-99e4-9bc3e1ca528a.png)
+
+Step 1:
+
+So, in the first step, we will connect to Firebase. When we click on connect to Firebase, it may bring up our browser, and wemay have to log into our Google account.If we log in to our Google account, 
+we may have to give access to Android Studio so that it can allow us to add stuff.
+
+![f3](https://user-images.githubusercontent.com/51777024/85912357-86af9a00-b849-11ea-8712-b9f4bf0fe118.png)
+
+When we click on allow, it will take us back to Android Studio. Because our project is already connected with Firebase, it will pop up a message, i.e., Firebase already connected. But if our project is not connected with Firebase, it will show the following window.
+
+![f4](https://user-images.githubusercontent.com/51777024/85912364-8c0ce480-b849-11ea-8d3b-8c6263261c96.png)
+
+Here, we have to create a new Firebase project or choosing the existing Firebase project. It completely depends on us. When we click on Connect to Firebase, our project will connect with Firebase successfully.
+
+![f5](https://user-images.githubusercontent.com/51777024/85912367-8fa06b80-b849-11ea-8bd4-844f90d5aa53.png)
+
+Step 2:
+
+In the next step, we will add analytics to our app by clicking on Add Analytics to your app. This will actually update our build.gradle files, which we did in the previous section.
+
+![f6](https://user-images.githubusercontent.com/51777024/85912370-9202c580-b849-11ea-9d4c-050d9743335f.png)
+
+When we click on Accept Changes, it will update our Gradle files, which we can verify by going to build. Gradle files.
+
+![f7](https://user-images.githubusercontent.com/51777024/85912372-962ee300-b849-11ea-9077-e3a46ba7a437.png)
+
+![f8](https://user-images.githubusercontent.com/51777024/85912373-9929d380-b849-11ea-848c-912f425b58c0.png)
+
+
 
 
 
