@@ -28,12 +28,9 @@ authentication and hosting, etc. Let's take a look at these features to understa
 # Types of Authentications
 
 You can authenticate your app’s users through the following methods:
+
 * Email & Password
 * Phone numbers
 * Google
 * Facebook
 * Twitter
-![pasted image 0](https://user-images.githubusercontent.com/51777024/85911863-93ca8a00-b845-11ea-87ae-cd5ef11a840d.png)
-
-
-
