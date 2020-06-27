@@ -90,8 +90,11 @@ When we click on Accept Changes, it will update our Gradle files, which we can v
 
 ![f8](https://user-images.githubusercontent.com/51777024/85912373-9929d380-b849-11ea-848c-912f425b58c0.png)
 
+Step 3:
 
-
+To sign in users by SMS, you must first enable the Phone Number sign-in method for your Firebase project:
+* In the Firebase console, open the Authentication section.
+* On the Sign-in Method page, enable the Phone Number sign-in method.
 
 
 
