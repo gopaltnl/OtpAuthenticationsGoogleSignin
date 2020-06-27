@@ -104,6 +104,19 @@ private FirebaseAuth mAuth;
 mAuth = FirebaseAuth.getInstance();
 
 ```
+Step 5:Send a Verification Code to the Users Phone
+
+```
+pass their phone number to the PhoneAuthProvider.verifyPhoneNumber method to request that Firebase verify the user's phone number. For example:
+PhoneAuthProvider.getInstance().verifyPhoneNumber(
+        phoneNumber,        // Phone number to verify
+        60,                 // Timeout duration
+        TimeUnit.SECONDS,   // Unit of timeout
+        this,               // Activity (for callback binding)
+        mCallbacks);        // OnVerificationStateChangedCallbacks
+```
+
+
 
 
 
