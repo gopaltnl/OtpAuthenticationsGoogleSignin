@@ -25,4 +25,13 @@ authentication and hosting, etc. Let's take a look at these features to understa
 
 ![firebase-authentication](https://user-images.githubusercontent.com/51777024/85911439-d9398800-b842-11ea-99ef-9c5631ddb172.png)
 
+# Types of Authentications
+
+You can authenticate your app’s users through the following methods:
+* Email & Password
+* Phone numbers
+* Google
+* Facebook
+* Twitter
+
 
