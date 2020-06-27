@@ -11,5 +11,7 @@ experiment.
 
 # Features of Firebase
 Firebase has several features that make this platform essential. These features include unlimited reporting, cloud messaging,
-authentication and hosting, etc. Let's take a look at these features to understand how these features make Firebase essential
+authentication and hosting, etc. Let's take a look at these features to understand how these features make Firebase essential.
+
+![Bg4r7dI1Q2W3bX9Sf4oD_unnamed](https://user-images.githubusercontent.com/51777024/85911120-9d9dbe80-b840-11ea-873f-f30665d098ff.png)
 
