@@ -1391,3 +1391,20 @@ public class ShowImagesActivity extends AppCompatActivity {
 
 ![c3](https://user-images.githubusercontent.com/51777024/85917269-431f5500-b876-11ea-9162-57cc864f8e04.png)
 
+# FireStorage Video Upload And Retrive In TabNavigation
+
+# TabLayout Example using ViewPager and Fragments in Android''
+
+If you are using the latest android application then you have noticed that now days android is following a design pattern. This is material design and it came with Android Lollipop (5.0). Though we can still use this design pattern for the older versions (>4.0) by using the support libraries. One of the component of material design is TabLayout. So in this TablLayout Example we will see how we can implement it in our android application.
+
+# What is TabLayout ?
+
+Android TabLayout provides horizontal layout to display tabs. We can display more screens in a single screen using tabs. User can swipe the tabs quickly as you can see in the image below.
+
+![Screenshot_20200627_135527](https://user-images.githubusercontent.com/51777024/85918661-66500180-b882-11ea-9255-c9054e1eb3e2.jpg)
+![Screenshot_20200627_135558](https://user-images.githubusercontent.com/51777024/85918664-6cde7900-b882-11ea-98ce-b0bfe97b500f.jpg)
+
+
+
+
+
