@@ -735,6 +735,8 @@ Now, we will go to the Facebook setting page. Here, we will add the OAuth redire
 
 In the next step, we will create a Facebook login button from the SDK. It is a UI element that wraps functionality available in the login manager.
 
+![f25](https://user-images.githubusercontent.com/51777024/85914409-e2365380-b85a-11ea-8798-03b9eb915fec.png)
+
 # Step 13:
 
 In the next step, we will modify our MainActivity.java file to perform the authentication using Facebook in the following way:
@@ -828,8 +830,6 @@ public class MainActivity extends AppCompatActivity {
 }  
 ```
 # Output:
-
-![f25](https://user-images.githubusercontent.com/51777024/85914409-e2365380-b85a-11ea-8798-03b9eb915fec.png)
 
 ![f26](https://user-images.githubusercontent.com/51777024/85914411-e5c9da80-b85a-11ea-9c8b-8bc80de000ac.png)
 
