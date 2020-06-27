@@ -603,3 +603,8 @@ public void onPointerCaptureChanged(boolean hasCapture) {
 # Download Code:
 
 https://github.com/AP-Skill-Development-Corporation/AdvancedAndroid/tree/master/GoogleSignInAuthentication
+
+# ------------------------------------------------------------------------------
+
+# Firebase: Facebook Sign-In Authentication
+
