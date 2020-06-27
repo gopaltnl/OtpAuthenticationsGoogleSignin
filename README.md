@@ -395,7 +395,7 @@ public class MainActivity extends AppCompatActivity {
 
 https://github.com/AP-Skill-Development-Corporation/AdvancedAndroid/tree/master/GopalOtpAuth
 
-# -------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
 
 # Firebase Google Sign-In Authentication
 
