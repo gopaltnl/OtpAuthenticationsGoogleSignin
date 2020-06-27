@@ -381,4 +381,6 @@ public void onPointerCaptureChanged(boolean hasCapture) {
 ![s6](https://user-images.githubusercontent.com/51777024/85913142-bd88ae80-b84f-11ea-81bb-ba6a28dd4ec8.png)
 
 
+# Download Code:
 
+https://github.com/AP-Skill-Development-Corporation/AdvancedAndroid/tree/master/GoogleSignInAuthentication
