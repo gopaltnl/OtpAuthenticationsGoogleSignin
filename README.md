@@ -37,3 +37,7 @@ You can authenticate your app’s users through the following methods:
 
 ![pasted image 0](https://user-images.githubusercontent.com/51777024/85911863-93ca8a00-b845-11ea-87ae-cd5ef11a840d.png)
 
+# Sample Mobile Otp Authentication
+
+![example](https://user-images.githubusercontent.com/51777024/85912071-35061000-b847-11ea-86fb-3a27ac3c92a6.jpg)
+
