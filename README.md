@@ -64,6 +64,7 @@ Let's start with basics, i.e., Analytics. When we select Analytics, it gives us 
 
 # Step 1:
 
+
 So, in the first step, we will connect to Firebase. When we click on connect to Firebase, it may bring up our browser, and wemay have to log into our Google account.If we log in to our Google account, 
 we may have to give access to Android Studio so that it can allow us to add stuff.
 
