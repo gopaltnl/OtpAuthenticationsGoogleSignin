@@ -96,5 +96,14 @@ To sign in users by SMS, you must first enable the Phone Number sign-in method f
 * In the Firebase console, open the Authentication section.
 * On the Sign-in Method page, enable the Phone Number sign-in method.
 
+Step 4 :get the firebase instance at oncreate()
+
+```
+private FirebaseAuth mAuth;
+// Initialize Firebase Auth
+mAuth = FirebaseAuth.getInstance();
+
+```
+
 
 
