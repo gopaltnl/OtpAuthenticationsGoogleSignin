@@ -33,5 +33,7 @@ You can authenticate your app’s users through the following methods:
 * Google
 * Facebook
 * Twitter
+![pasted image 0](https://user-images.githubusercontent.com/51777024/85911863-93ca8a00-b845-11ea-87ae-cd5ef11a840d.png)
+
 
 
