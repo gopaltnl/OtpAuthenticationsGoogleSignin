@@ -1592,5 +1592,37 @@ public class VediosActivity extends AppCompatActivity {
 }
 
 ```
+# Right click on java first package Select New Class Name Video
+
+```
+package com.example.findapp;
+
+public class Video
+{
+    private String about;
+    private String video_url;
+
+    public Video() {
+
+    }
+
+    public Video(String about, String video_url) {
+        this.about = about;
+        this.video_url = video_url;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public String getVideo_url() {
+        return video_url;
+    }
+}
+
+```
+# Goto Video Fragment 
+
+
 
 
