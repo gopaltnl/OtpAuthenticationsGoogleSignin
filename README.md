@@ -49,5 +49,10 @@ We create a new project by clicking on Start a new Android Studio project from W
 
 ![imag1](https://user-images.githubusercontent.com/51777024/85912182-400d7000-b848-11ea-81ec-e523965e1fae.jpg)
 
+![image2](https://user-images.githubusercontent.com/51777024/85912231-9084cd80-b848-11ea-9595-56625b09fc58.png)
+
+![image3](https://user-images.githubusercontent.com/51777024/85912239-a5616100-b848-11ea-8a43-03d311d44df3.png)
+
+
 
 
