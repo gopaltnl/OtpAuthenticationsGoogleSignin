@@ -1622,8 +1622,240 @@ public class Video
 }
 
 ```
-# Goto Video Fragment 
+# Goto fragment_video Xml file
+
+```
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".VideoFragment">
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+    </VideoView>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        app:passwordToggleTint="@color/colorAccent">
+
+    <EditText
+        android:id="@+id/editText"
+        android:hint="Enter Workshop Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </EditText>
+    </android.support.design.widget.TextInputLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/button2"
+            android:text="choose\nvedio"
+            android:layout_margin="20dp"
+            android:background="@drawable/shape1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </Button>
+        <Button
+            android:id="@+id/button"
+            android:text="upload\nvedio"
+            android:layout_margin="20dp"
+            android:background="@drawable/shape1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </Button>
+    </LinearLayout>
+
+</LinearLayout>
+```
+# Goto VideoFragment Activity File get the id's and implement the upload the images into firebase storage
+
+```
+package com.example.findapp;
 
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.MediaController;
+import android.widget.Toast;
+import android.widget.VideoView;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import java.util.HashMap;
+import java.util.Map;
+
+public class VideoFragment extends Fragment {
+
+
+    private StorageReference mStorageRef;
+    DatabaseReference database;
+    Button choose, upload;
+    EditText text;
+    Uri mainUri, dbstoredPath;
+    VideoView videoView;
+    private static final int SELECT_VIDEO = 1;
+    private String selectedVideoPath;
+    MediaController videoMediaController;
+
+    int RESULT_OK;
+    ProgressDialog progressDialog;
+
+    public VideoFragment() {
+        // Required empty public constructor
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_video, container, false);
+
+        videoView = view.findViewById(R.id.videoView);
+        text = view.findViewById(R.id.editText);
+        videoMediaController = new MediaController(getActivity());
+        choose = view.findViewById(R.id.button2);
+        choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, SELECT_VIDEO);
+            }
+        });
+
+
+        upload=view.findViewById(R.id.button);
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (mainUri!=null){
+                    showProgress();
+                    text.getText().toString();
+                    mStorageRef = FirebaseStorage.getInstance().getReference().child("Videos").child(mainUri.getLastPathSegment());
+                    database = FirebaseDatabase.getInstance().getReference("Videos");
+
+                    mStorageRef.putFile(mainUri)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri uri) {
+                                            dbstoredPath = uri;
+
+                                            Toast.makeText(getActivity(), "Uploaded!!!", Toast.LENGTH_SHORT).show();
+                                            Log.i("Upload:",""+uri.toString());
+
+                                            Map<String,Object> map = new HashMap<>();
+                                            map.put("about",text.getText().toString());
+                                            map.put("video_url",uri.toString());
+                                            database.child(text.getText().toString()).setValue(map);
+                                            Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT).show();
+
+                                            progressDialog.dismiss();
+                                            getActivity().finish();
+                                        }
+                                    });
+
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.i("Upload:","Failed :"+e.getMessage());
+                                }
+                            });
+
+                }else {
+                    Toast.makeText(getActivity(), "Please Select video!!!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        return view;
+
+    }
+
+
+    public void showProgress(){
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Uploading..");
+        progressDialog.setMessage("please wait uploading in progress...");
+        progressDialog.show();
+    }
+
+    @ Override
+    public void onActivityResult(int requestCode,
+                                 int resultCode, Intent data) {
+        Toast.makeText(getActivity(), "onActivityResult..."+requestCode, Toast.LENGTH_SHORT).show();
+        /*if (resultCode == RESULT_OK) {*/
+            selectedVideoPath = getPath(data.getData());
+
+
+            Log.i("Check:::", "onActivityResult: "+selectedVideoPath);
+            if (requestCode == SELECT_VIDEO) {
+                selectedVideoPath = getPath(data.getData());
+                if(selectedVideoPath == null) {
+                    Log.e("selected video path ","= null!");
+                    getActivity().finish();
+                } else {
+
+                    Log.i("URI",selectedVideoPath);
+
+                    videoView.setVideoURI(data.getData());
+                    mainUri = data.getData();
+                    videoMediaController.setMediaPlayer(videoView);
+                    videoView.setMediaController(videoMediaController);
+                    videoView.requestFocus();
+                }
+            }
+
+    }
+
+    private String getPath(Uri data) {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getActivity().managedQuery(data, projection, null, null, null);
+        if(cursor!=null) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        }
+        else return null;
+    }
+}
+```
 
 
