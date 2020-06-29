@@ -1728,15 +1728,12 @@ public class VideoFragment extends Fragment {
     private static final int SELECT_VIDEO = 1;
     private String selectedVideoPath;
     MediaController videoMediaController;
-
     int RESULT_OK;
     ProgressDialog progressDialog;
 
     public VideoFragment() {
         // Required empty public constructor
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -1753,8 +1750,7 @@ public class VideoFragment extends Fragment {
                 startActivityForResult(i, SELECT_VIDEO);
             }
         });
-
-
+        
         upload=view.findViewById(R.id.button);
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1774,7 +1770,6 @@ public class VideoFragment extends Fragment {
                                         @Override
                                         public void onSuccess(Uri uri) {
                                             dbstoredPath = uri;
-
                                             Toast.makeText(getActivity(), "Uploaded!!!", Toast.LENGTH_SHORT).show();
                                             Log.i("Upload:",""+uri.toString());
 
@@ -1804,12 +1799,8 @@ public class VideoFragment extends Fragment {
 
             }
         });
-
         return view;
-
     }
-
-
     public void showProgress(){
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setTitle("Uploading..");
@@ -1823,7 +1814,6 @@ public class VideoFragment extends Fragment {
         Toast.makeText(getActivity(), "onActivityResult..."+requestCode, Toast.LENGTH_SHORT).show();
         /*if (resultCode == RESULT_OK) {*/
             selectedVideoPath = getPath(data.getData());
-
 
             Log.i("Check:::", "onActivityResult: "+selectedVideoPath);
             if (requestCode == SELECT_VIDEO) {
@@ -1842,7 +1832,6 @@ public class VideoFragment extends Fragment {
                     videoView.requestFocus();
                 }
             }
-
     }
 
     private String getPath(Uri data) {
@@ -1857,5 +1846,205 @@ public class VideoFragment extends Fragment {
     }
 }
 ```
+# Retrive the Video Into A FireBase Storage To Display the Recyclerview.
+
+
+# Step1:Create A ShowVdeioFragment 
+
+# Step2:goto fragment_show_vdeio xml file
+
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".ShowVdeioFragment">
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/rec"
+        android:layout_height="wrap_content"
+   />
+
+
+</LinearLayout>
+
+```
+# Step3:goto ShowVdeioFragment  file
+
+```
+package com.example.findapp;
+
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import java.util.ArrayList;
+
+public class ShowVdeioFragment extends Fragment {
+
+
+    RecyclerView recyclerView;
+    DatabaseReference reference;
+
+    public ShowVdeioFragment() {
+    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState)
+    {
+        View view=inflater.inflate(R.layout.fragment_show_vdeio,
+                container, false);
+
+        recyclerView = view.findViewById(R.id.rec);
+
+        reference = FirebaseDatabase.getInstance().getReference("Videos");
+
+        final ArrayList<Video> list = new ArrayList<>();
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    Video model = ds.getValue(Video.class);
+                    list.add(model);
+                }
+                Log.i("logs:","list size:"+list.size());
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                recyclerView.setAdapter(new VideoAdapter(getContext(),list));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+
+        return view;
+    }
+
+}
+
+```
+
+# Step4:Create the videorow.xml file
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <ImageView
+        android:id="@+id/video"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="fitXY"
+        android:layout_gravity="center"
+        android:src="@drawable/play"/>
+
+    <TextView
+        android:id="@+id/videoname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="Video Name"
+        android:textSize="25sp"/>
+   
+</LinearLayout>
+
+```
+
+# Step5:Create a Adapter Class name as VideoAdapter
+
+```
+package com.example.findapp;
+
+import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
+
+class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VHolder>
+{
+    Context context;
+    ArrayList<Video> list;
+
+    public VideoAdapter(Context fragment, ArrayList<Video> list)
+    {
+        this.context=fragment;
+        this.list=list;
+    }
+
+    @NonNull
+    @Override
+    public VideoAdapter.VHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)
+    {
+        View view= LayoutInflater.from(context).inflate(R.layout.videorow,viewGroup,false);
+
+        return new VHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull VideoAdapter.VHolder vHolder, final int i)
+
+    {
+        vHolder.name.setText(list.get(i).getAbout());
+        Glide.with(context).load(list.get(i).getVideo_url()).into(vHolder.video);
+    }
+
+    @Override
+    public int getItemCount() {
+        if (list!=null) {
+            return list.size();
+        }else {
+            return 0;
+        }
+    }
+
+    public class VHolder extends RecyclerView.ViewHolder 
+        TextView name;
+        ImageView video;
+    
+        public VHolder(@NonNull final View itemView)
+        {
+            super(itemView);
+            name = itemView.findViewById(R.id.videoname);
+            video = itemView.findViewById(R.id.video);
+        }
+    }
+}
+
+```
+
 
 
