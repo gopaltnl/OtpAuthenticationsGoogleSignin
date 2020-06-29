@@ -2046,5 +2046,7 @@ class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VHolder>
 
 ```
 
+![i](https://user-images.githubusercontent.com/51777024/85993760-73045f00-ba14-11ea-959d-96fa224ee530.jpg)
+
 
 
